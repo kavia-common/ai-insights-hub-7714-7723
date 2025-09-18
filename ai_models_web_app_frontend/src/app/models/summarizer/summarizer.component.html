@@ -1,0 +1,51 @@
+<div class="card" style="padding: 18px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;">
+    <div>
+      <div class="h1" style="display:flex; align-items:center; gap:10px;">
+        Text Summarizer
+        <span class="badge">Mock</span>
+      </div>
+      <div class="subtle" style="margin-top:4px;">Paste your text, then run a quick summary. This is a placeholder for an NLP model.</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-ghost" (click)="reset()">Clear</button>
+      <button class="btn btn-primary" (click)="summarize()" [disabled]="loading()">Summarize</button>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div>
+      <label class="label">Input Text</label>
+      <textarea class="input" rows="10" [(ngModel)]="inputText" placeholder="Paste or type text to summarize..."></textarea>
+      <div class="subtle" style="margin-top:6px; font-size:.86rem;">
+        Characters: {{ charCount }} • Words: {{ wordCount }}
+      </div>
+    </div>
+
+    <div>
+      <label class="label">Summary Result</label>
+      <div class="output card" [class.loading]="loading()">
+        <ng-container *ngIf="!loading(); else loadingTpl">
+          <ng-container *ngIf="outputText(); else placeholderTpl">
+            <div style="white-space: pre-wrap; line-height:1.6;">{{ outputText() }}</div>
+          </ng-container>
+        </ng-container>
+        <ng-template #loadingTpl>
+          <div class="skeleton">
+            <div class="line" style="width: 90%"></div>
+            <div class="line" style="width: 85%"></div>
+            <div class="line" style="width: 92%"></div>
+            <div class="line" style="width: 70%"></div>
+          </div>
+        </ng-template>
+        <ng-template #placeholderTpl>
+          <div class="subtle" style="font-style: italic;">Summary will appear here...</div>
+        </ng-template>
+      </div>
+
+      <div *ngIf="error()" style="margin-top:8px; color: var(--color-error); font-weight:600;">
+        {{ error() }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="card" style="padding:18px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;">
+    <div>
+      <div class="h1" style="display:flex; align-items:center; gap:10px;">
+        Image Captioner
+        <span class="badge">Mock</span>
+      </div>
+      <div class="subtle" style="margin-top:4px;">Upload an image to generate a descriptive caption. This is a placeholder for a vision model.</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn btn-ghost" (click)="reset()">Clear</button>
+      <button class="btn btn-primary" (click)="runCaption()" [disabled]="loading()">Generate Caption</button>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div>
+      <label class="label">Select Image</label>
+      <div class="uploader card">
+        <input type="file" accept="image/*" (change)="onFileChange($event)" />
+        <div class="subtle" style="font-size:.9rem;">PNG, JPG up to ~5MB.</div>
+      </div>
+
+      <div class="preview card" *ngIf="previewUrl()">
+        <img [src]="previewUrl()" alt="Preview" />
+      </div>
+    </div>
+
+    <div>
+      <label class="label">Caption</label>
+      <div class="output card" [class.loading]="loading()">
+        <ng-container *ngIf="!loading(); else loadingTpl">
+          <ng-container *ngIf="caption(); else placeholderTpl">
+            <div style="white-space: pre-wrap; line-height:1.6;">{{ caption() }}</div>
+          </ng-container>
+        </ng-container>
+        <ng-template #loadingTpl>
+          <div class="skeleton">
+            <div class="line" style="width: 82%"></div>
+            <div class="line" style="width: 66%"></div>
+          </div>
+        </ng-template>
+        <ng-template #placeholderTpl>
+          <div class="subtle" style="font-style: italic;">Caption will appear here...</div>
+        </ng-template>
+      </div>
+
+      <div *ngIf="error()" style="margin-top:8px; color: var(--color-error); font-weight:600;">
+        {{ error() }}
+      </div>
+    </div>
+  </div>
+</div>

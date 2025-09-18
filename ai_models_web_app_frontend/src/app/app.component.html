@@ -1,3 +1,67 @@
-<div class="container">
-  <h1>{{ title }}</h1>
+<div class="app-shell">
+  <!-- Top Navigation Bar -->
+  <header class="app-topbar">
+    <div class="container-fluid" style="max-width:1280px; margin:0 auto; padding: 14px 18px; display:flex; align-items:center; gap:14px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="width:40px;height:40px;border-radius:12px;background: var(--gradient-strong); box-shadow: var(--shadow-sm); border:1px solid rgba(37,99,235,0.25);"></div>
+        <div>
+          <div class="h1" style="display:flex;align-items:center;gap:10px;">
+            AI Models Hub
+            <span class="badge">Ocean Professional</span>
+          </div>
+          <div class="subtle" style="font-size: .92rem;">Explore multiple AI models in a unified interface</div>
+        </div>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px;">
+        <button class="btn btn-ghost" (click)="openDocs()">Docs</button>
+        <button class="btn btn-primary" (click)="newSession()">
+          New Session
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="app-content">
+    <!-- Side Menu -->
+    <aside class="app-sidenav">
+      <div class="card" style="padding:14px;">
+        <div class="label" style="font-weight:700; color:#0f172a; margin-bottom:8px;">Models</div>
+        <nav class="nav-menu">
+          <a class="nav-item" [class.active]="activeSegment === 'summarizer'" (click)="go('summarizer')">
+            <span style="width:10px;height:10px;border-radius:999px;background: var(--color-primary); box-shadow:0 0 0 4px rgba(37,99,235,0.15);"></span>
+            Text Summarizer
+            <span class="badge">NLP</span>
+          </a>
+          <a class="nav-item" [class.active]="activeSegment === 'image-captioner'" (click)="go('image-captioner')">
+            <span style="width:10px;height:10px;border-radius:999px;background: var(--color-secondary); box-shadow:0 0 0 4px rgba(245,158,11,0.15);"></span>
+            Image Captioner
+            <span class="badge" style="background: rgba(245,158,11,0.18); color:#8a5804;">Vision</span>
+          </a>
+
+          <hr class="separator" />
+
+          <a class="nav-item" [class.active]="activeSegment === 'about'" (click)="go('about')">
+            <span style="width:10px;height:10px;border-radius:999px;background: #6b7280; box-shadow:0 0 0 4px rgba(107,114,128,0.15);"></span>
+            About
+          </a>
+        </nav>
+      </div>
+
+      <div class="card" style="padding:14px; margin-top:12px;">
+        <div class="label" style="font-weight:700; color:#0f172a; margin-bottom:8px;">Session</div>
+        <div class="subtle" style="font-size:.9rem;">Use the New Session button to reset state and clear outputs.</div>
+      </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    Built with Angular. Theme: Ocean Professional — primary #2563EB, amber #F59E0B. Credits: Kavia AI Sandbox.
+  </footer>
 </div>
