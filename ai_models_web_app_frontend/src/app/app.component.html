@@ -1,3 +1,62 @@
-<div class="container">
-  <h1>{{ title }}</h1>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">AI</div>
+    <div class="titles">
+      <h1>AI Models Hub</h1>
+      <p class="subtitle">Ocean Professional</p>
+    </div>
+  </div>
+  <nav class="nav-actions">
+    <a routerLink="/" class="nav-link" aria-label="Home">Home</a>
+    <a routerLink="/about" class="nav-link" aria-label="About">About</a>
+    <button class="primary-btn" (click)="toggleTheme()" aria-label="Toggle theme">Theme</button>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" role="navigation" aria-label="Model selection">
+    <div class="sidebar-header">
+      <h2>Models</h2>
+      <p>Select a model to interact</p>
+    </div>
+    <ul class="menu">
+      <li>
+        <a routerLink="/chat" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <span class="icon">💬</span>
+          <span>Chat Assistant</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/summarizer" routerLinkActive="active">
+          <span class="icon">📝</span>
+          <span>Text Summarizer</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="info-card">
+      <h3>Tips</h3>
+      <ul>
+        <li>Use clear prompts for better results.</li>
+        <li>Experiment with settings like temperature.</li>
+        <li>Results are simulated for now.</li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="content" role="main">
+    <router-outlet></router-outlet>
+  </main>
 </div>
+
+<footer class="footer">
+  <div class="credits">
+    <span>© {{year}} AI Insights Hub</span>
+    <span class="sep">•</span>
+    <span>Theme: Ocean Professional</span>
+  </div>
+  <div class="links">
+    <a href="https://angular.dev" target="_blank" rel="noopener" aria-label="Angular Docs">Angular</a>
+    <a href="https://rxjs.dev" target="_blank" rel="noopener" aria-label="RxJS Docs">RxJS</a>
+  </div>
+</footer>
